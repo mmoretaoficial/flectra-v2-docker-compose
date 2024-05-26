@@ -7,18 +7,18 @@ Installing Flectra v2 with one command.
 Install [docker](https://docs.docker.com/get-docker/) and [docker-compose](https://docs.docker.com/compose/install/) yourself, then run:
 
 ``` bash
-curl -s https://github.com/mmoretaoficial/flectra-v2-docker-compose/master/run.sh | sudo bash -s flectra-one 10002 20002
+curl -s https://github.com/mmoretaoficial/flectra-v2-docker-compose/main/run.sh | sudo bash -s flectra-one 10002 20002
 ```
 
-to set up first Flectra instance @ `localhost:1002` (default master password: `flectra.info`)
+to set up first Flectra instance @ `localhost:10002` (default main password: `flectra.info`)
 
 and
 
 ``` bash
-curl -s https://github.com/mmoretaoficial/flectra-v2-docker-compose/master/run.sh | sudo bash -s flectra-two 11002 21002
+curl -s https://github.com/mmoretaoficial/flectra-v2-docker-compose/main/run.sh | sudo bash -s flectra-two 11002 21002
 ```
 
-to set up another Flectra instance @ `localhost:11002` (default master password: `flectra.info`)
+to set up another Flectra instance @ `localhost:11002` (default main password: `flectra.info`)
 
 Some arguments:
 * First argument (**flectra-one**): Flectra deploy folder
