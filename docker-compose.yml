@@ -1,35 +1,37 @@
-version: '2'
+version: '3.8'
+
 services:
   db:
-    image: postgres:9.5
-    user: root
+    image: postgres:13
     environment:
-      - POSTGRES_PASSWORD=flectra
-      - POSTGRES_USER=flectra
-      - POSTGRES_DB=postgres
-    restart: always             # run as a service
+      POSTGRES_DB: flectra
+      POSTGRES_USER: flectra
+      POSTGRES_PASSWORD: flectra
     volumes:
-      - ./postgresql:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - flectra-net
 
-  flectra2:
-    image: flectra:2.0
-    user: root
+  flectra:
+    image: flectrahq/flectra:2.0
     depends_on:
       - db
-    ports:
-      - "10002:7073"
-      - "20002:8072" # live chat
-    tty: true
-    command: --
-#    command: flectra scaffold /mnt/extra-addons/test_module
     environment:
-      - HOST=db
-      - USER=flectra
-      - PASSWORD=flectra
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: flectra
+      DB_PASSWORD: flectra
+      DB_NAME: flectra
+    ports:
+      - "7073:7073"
     volumes:
-      #- /etc/timezone:/etc/timezone:ro
-      #- /etc/localtime:/etc/localtime:ro
-      # - ./entrypoint.sh:/entrypoint.sh   # if you want to install additional Python packages, uncomment this line!
-      - ./addons:/mnt/extra-addons
-      - ./etc:/etc/flectra
-    restart: always             # run as a service
+      - flectra_data:/var/lib/flectra
+    networks:
+      - flectra-net
+
+volumes:
+  postgres_data:
+  flectra_data:
+
+networks:
+  flectra-net:
